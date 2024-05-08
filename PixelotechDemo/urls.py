@@ -15,7 +15,18 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+from UserAuth import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('verification', views.UserVerification, name='Verification'),
+    path('getAllUser', views.GetAllUser, name='GetAllUser'),
+    path('getUserById/<int:user_id>', views.GetUserById, name='GetUserById'),
+    path('getAllProduct', views.GetAllProduct, name='GetAllProduct'),
+    path('getProductById/<int:user_id>', views.GetProductById, name='GetProductById'),
+    path('userRegistration', views.UserRegistration, name='UserRegistration'),
+    path('otpGeneration', views.OtpGeneration, name='OtpGeneration'),
 ]
+
+urlpatterns+=staticfiles_urlpatterns()

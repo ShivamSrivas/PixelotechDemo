@@ -23,6 +23,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-25f6u!1pc63grb1!4c!n=@ml65e@o2)n+8+it!_^o4$_+txbo@'
+API_KEY="833244f2-0bde-11ef-8cbb-0200cd936042"
+EMAIL_KEY="uzqt brax gsrm kyxg"
 
 
 EMAIL={
@@ -85,20 +87,21 @@ WSGI_APPLICATION = 'PixelotechDemo.wsgi.application'
 
 
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'Pixelotech',
-#         'USER': 'postgres',
-#         'PASSWORD': '123456',
-#         'HOST': 'localhost',   
-#         'PORT': '5432',        
-#     }
-# }
-
 DATABASES = {
-    'default':dj_database_url.parse(os.environ.get("DATABASE_URL"))
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'Pixelotech',
+        'USER': 'postgres',
+        'PASSWORD': '123456',
+        'HOST': 'localhost',   
+        'PORT': '5432',        
     }
+}
+
+
+# DATABASES = {
+#     'default':dj_database_url.parse(os.environ.get("DATABASE_URL"))
+#     }
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators

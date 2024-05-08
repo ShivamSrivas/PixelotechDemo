@@ -1,0 +1,10 @@
+setup.py
+Packages.egg-info/PKG-INFO
+Packages.egg-info/SOURCES.txt
+Packages.egg-info/dependency_links.txt
+Packages.egg-info/top_level.txt
+PixelotechDemo/__init__.py
+PixelotechDemo/asgi.py
+PixelotechDemo/settings.py
+PixelotechDemo/urls.py
+PixelotechDemo/wsgi.py

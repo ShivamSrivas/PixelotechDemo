@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
 from pathlib import Path
+import dj_database_url
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -21,14 +23,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-25f6u!1pc63grb1!4c!n=@ml65e@o2)n+8+it!_^o4$_+txbo@'
-API_KEY="833244f2-0bde-11ef-8cbb-0200cd936042"
-EMAIL_KEY="uzqt brax gsrm kyxg"
+
 
 EMAIL={
     "subject":'Hello from Django!',
     "message":'This is a simple email sent using Django.',
     "sender_email":"thisemailisfordemopurposeonly@gmail.com",
-    "recipient_list": ['shivamsri896@gmail.com'],
 }
 
 STATIC_URL='static/'
@@ -83,16 +83,22 @@ TEMPLATES = [
 WSGI_APPLICATION = 'PixelotechDemo.wsgi.application'
 
 
-# Database
-# https://docs.djangoproject.com/en/4.0/ref/settings/#databases
+
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'Pixelotech',
+#         'USER': 'postgres',
+#         'PASSWORD': '123456',
+#         'HOST': 'localhost',   
+#         'PORT': '5432',        
+#     }
+# }
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+    'default':dj_database_url.parse(os.environ.get("DATABASE_URL"))
     }
-}
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators

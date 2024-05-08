@@ -1,9 +1,10 @@
 import requests 
 import random
 import smtplib
+import os
 from Log.logger import logger_call
 from .models import UserProfileDetail, PhoneVerification, EmailVerification, Product
-from PixelotechDemo.settings import API_KEY, EMAIL_KEY, EMAIL
+from PixelotechDemo.settings import  EMAIL
 
 class UserAuth:
     def __init__(self, ProcessId):
@@ -15,7 +16,9 @@ class UserAuth:
                 if UserProfileDetail.objects.filter(PhoneNumber=PhoneNumber).exists():
                     return "Phone number is already in use"
                 otp = random.randint(1000, 2222)
+                API_KEY=os.environ.get("API_KEY")
                 url = f"https://2factor.in/API/V1/{API_KEY}/SMS/{PhoneNumber}/{otp}"
+
                 response = requests.get(url)
                 response.raise_for_status()
                 logger_call("/Log/UserAuth.log", self.ProcessId, "OTP sent via SMS", "Info")
@@ -28,7 +31,8 @@ class UserAuth:
                 otp = random.randint(1000, 2222)
                 server = smtplib.SMTP("smtp.gmail.com", 587)
                 server.starttls()
-                server.login(EMAIL["sender_email"], EMAIL_KEY)
+                EMAIL_KEY=os.environ.get("EMAIL_KEY")
+                server.login(EMAIL["sender_email"],EMAIL_KEY)
                 server.sendmail(EMAIL["sender_email"], EmailRecipient, msg=str(otp))
                 server.quit()
                 logger_call("/Log/UserAuth.log", self.ProcessId, "OTP sent via email", "Info")

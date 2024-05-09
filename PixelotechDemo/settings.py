@@ -83,18 +83,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'PixelotechDemo.wsgi.application'
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'Pixelotech',
-#         'USER': 'postgres',
-#         'PASSWORD': '123456',
-#         'HOST': 'localhost',   
-#         'PORT': '5432',        
-#     }
-# }
-
-
 database_url = os.environ.get("DATABASE_URL")
 if isinstance(database_url, bytes):
     database_url = database_url.decode('utf-8')

@@ -56,7 +56,7 @@ class UserAuth:
                 raise ValueError("Neither PhoneNumber nor EmailRecipient provided.")
         except Exception as error:
             logger_call(r"Log/UserAuth.log", self.ProcessId, f"Unexpected error: {error}", "Error")
-            return str(error)
+            return "There's an error while generating otp kindly please try again"
 
     def UserVerificationServices(self, Otp, PhoneNumber=None, Email=None):
         try:

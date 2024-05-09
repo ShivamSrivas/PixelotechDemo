@@ -16,7 +16,7 @@ def OtpGeneration(request):
             email_recipient = json_data.get('email_recipient')
             if phone_number or email_recipient:
                 otp = user_auth.OtpGenerationServices(phone_number, email_recipient)
-                if type(otp):
+                if type(otp) == 'init':
                     return JsonResponse({'data': {'otp': otp, 'contactInfo': phone_number if phone_number else email_recipient}, 'message': 'OTP sent successfully', 'status': 200})
                 else:
                     return JsonResponse({'message': 'Failed to send OTP', 'status': 500})

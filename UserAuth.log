@@ -1,0 +1,12 @@
+Date --> 2024-05-09 16:02:37 , ProcessId --> 938 , Message --> An error occurred while retrieving all user details: local variable 'e' referenced before assignment
+Date --> 2024-05-09 16:02:46 , ProcessId --> 938 , Message --> An error occurred while retrieving all user details: local variable 'e' referenced before assignment
+Date --> 2024-05-09 16:02:47 , ProcessId --> 938 , Message --> An error occurred while retrieving all user details: local variable 'e' referenced before assignment
+Date --> 2024-05-09 16:02:55 , ProcessId --> 938 , Message --> D:\FinallyDemo\PixelotechDemo\UserAuth\services.py changed, reloading.
+Date --> 2024-05-09 16:03:12 , ProcessId --> 597 , Message --> An error occurred while retrieving all user details: local variable 'e' referenced before assignment
+Date --> 2024-05-09 16:03:52 , ProcessId --> 597 , Message --> D:\FinallyDemo\PixelotechDemo\UserAuth\services.py changed, reloading.
+Date --> 2024-05-09 16:03:56 , ProcessId --> 926 , Message --> Retrieving all user details
+Date --> 2024-05-09 16:04:17 , ProcessId --> 926 , Message --> D:\FinallyDemo\PixelotechDemo\UserAuth\services.py changed, reloading.
+Date --> 2024-05-09 16:04:20 , ProcessId --> 33 , Message --> Retrieving all user details
+Date --> 2024-05-09 16:04:52 , ProcessId --> 33 , Message --> D:\FinallyDemo\PixelotechDemo\UserAuth\services.py changed, reloading.
+Date --> 2024-05-09 16:05:05 , ProcessId --> 490 , Message --> Retrieving all user details
+Date --> 2024-05-09 16:05:38 , ProcessId --> 490 , Message --> D:\FinallyDemo\PixelotechDemo\UserAuth\services.py changed, reloading.

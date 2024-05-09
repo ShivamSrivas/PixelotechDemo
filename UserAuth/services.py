@@ -22,7 +22,7 @@ class UserAuth:
 
                 response = requests.get(sms_url)
                 response.raise_for_status()
-                logger_call("/Log/UserAuth.log", self.ProcessId, "OTP sent via SMS", "Info")
+                logger_call(r"Log/UserAuth.log", self.ProcessId, "OTP sent via SMS", "Info")
                 phoneVerification = PhoneVerification(PhoneNumber=PhoneNumber, Otp=otp)
                 phoneVerification.save()
                 return otp
@@ -49,14 +49,14 @@ class UserAuth:
                 server.login(email_settings["sender_email"], EMAIL_KEY)
                 server.sendmail(email_settings["sender_email"], EmailRecipient, msg.as_string())
                 server.quit()
-                logger_call("/Log/UserAuth.log", self.ProcessId, "OTP sent via email", "Info")
+                logger_call(r"Log/UserAuth.log", self.ProcessId, "OTP sent via email", "Info")
                 emailVerification = EmailVerification(Email=EmailRecipient, Otp=otp)
                 emailVerification.save()
                 return otp
             else:
                 raise ValueError("Neither PhoneNumber nor EmailRecipient provided.")
         except Exception as error:
-            logger_call("/Log/UserAuth.log", self.ProcessId, f"Unexpected error: {error}", "Error")
+            logger_call(r"Log/UserAuth.log", self.ProcessId, f"Unexpected error: {error}", "Error")
             return str(error)
 
     def UserVerificationServices(self, Otp, PhoneNumber=None, Email=None):
@@ -71,7 +71,7 @@ class UserAuth:
                     return True
             return False
         except Exception as e:
-            logger_call("/Log/UserAuth.log", self.ProcessId, f"An error occurred in UserVerificationServices: {e}", "Error")
+            logger_call(r"Log/UserAuth.log", self.ProcessId, f"An error occurred in UserVerificationServices: {e}", "Error")
             return False
 
     def UserRegistrationServices(self, Name, Email, PhoneNumber, Password):
@@ -82,18 +82,19 @@ class UserAuth:
                 return "Email is already in use"
             user = UserProfileDetail(Name=Name, Email=Email, PhoneNumber=PhoneNumber, Password=Password)
             user.save()
-            logger_call("/Log/UserAuth.log", self.ProcessId, f"A new user is created with Name: {Name}, Email: {Email}, Phone Number: {PhoneNumber}", "Info")
+            logger_call(r"Log/UserAuth.log", self.ProcessId, f"A new user is created with Name: {Name}, Email: {Email}, Phone Number: {PhoneNumber}", "Info")
             return user
         except Exception as error:
-            logger_call("/Log/UserAuth.log", self.ProcessId, f"Error occurred during user registration: {error}", "Error")
+            logger_call(r"Log/UserAuth.log", self.ProcessId, f"Error occurred during user registration: {error}", "Error")
             return str(error)
 
     def GetAllUserDetailsServices(self):
         try:
             users = UserProfileDetail.objects.all()
+            logger_call(r"Log/UserAuth.log", self.ProcessId,"Retrieving all user details", "Info")
             return users
         except Exception as e:
-            logger_call("/Log/UserAuth.log", self.ProcessId, f"An error occurred while retrieving all user details: {e}", "Error")
+            logger_call(r"Log/UserAuth.log", self.ProcessId, f"An error occurred while retrieving all user details: {e}", "Error")
             return []
 
     def GetUserByIdServices(self, UserId):
@@ -101,10 +102,10 @@ class UserAuth:
             user = UserProfileDetail.objects.filter(id=UserId).values('Email', 'PhoneNumber', 'Name', 'Rejected', 'Accepted').first()
             return user
         except UserProfileDetail.DoesNotExist:
-            logger_call("/Log/UserAuth.log", self.ProcessId, f"User with ID {UserId} does not exist", "Error")
+            logger_call(r"Log/UserAuth.log", self.ProcessId, f"User with ID {UserId} does not exist", "Error")
             return None
         except Exception as e:
-            logger_call("/Log/UserAuth.log", self.ProcessId, f"An error occurred while retrieving user details: {e}", "Error")
+            logger_call(r"Log/UserAuth.log", self.ProcessId, f"An error occurred while retrieving user details: {e}", "Error")
             return None
 
     def GetProductByIdServices(self, unique_number):
@@ -116,40 +117,41 @@ class UserAuth:
             }
             return product_info
         except Product.DoesNotExist:
-            logger_call("/Log/UserAuth.log", self.ProcessId, f"Product with unique number {unique_number} does not exist", "Error")
+            logger_call(r"Log/UserAuth.log", self.ProcessId, f"Product with unique number {unique_number} does not exist", "Error")
             return None
         except Exception as e:
-            logger_call("/Log/UserAuth.log", self.ProcessId, f"An error occurred while retrieving product details: {e}", "Error")
+            logger_call(r"Log/UserAuth.log", self.ProcessId, f"An error occurred while retrieving product details: {e}", "Error")
             return None
         
     def GetAllProductServices(self):
         try:
             products = Product.objects.all()
+            logger_call(r"Log/UserAuth.log", self.ProcessId, "Retrieving all products", "Error")
             return products
         except Exception as e:
-            logger_call("/Log/UserAuth.log", self.ProcessId, f"An error occurred while retrieving all products: {e}", "Error")
+            logger_call(r"Log/UserAuth.log", self.ProcessId, f"An error occurred while retrieving all products: {e}", "Error")
             return []
 
     def AddProductServices(self, unique_number, url):
         try:
             product = Product.objects.create(UniqueNumber=unique_number, Url=url)
-            logger_call("/Log/UserAuth.log", self.ProcessId, f"Product added with Unique Number: {unique_number}, URL: {url}", "Info")
+            logger_call(r"Log/UserAuth.log", self.ProcessId, f"Product added with Unique Number: {unique_number}, URL: {url}", "Info")
             return product
         except Exception as e:
-            logger_call("/Log/UserAuth.log", self.ProcessId, f"An error occurred while adding product: {e}", "Error")
+            logger_call(r"Log/UserAuth.log", self.ProcessId, f"An error occurred while adding product: {e}", "Error")
             return str(e)
 
     def DeleteProductByIdServices(self, ProductId):
         try:
             product = Product.objects.get(UniqueNumber=ProductId)
             product.delete()
-            logger_call("/Log/UserAuth.log", self.ProcessId, f"Product with ID {ProductId} deleted successfully", "Info")
+            logger_call(r"Log/UserAuth.log", self.ProcessId, f"Product with ID {ProductId} deleted successfully", "Info")
             return "Product deleted successfully"
         except Product.DoesNotExist:
-            logger_call("/Log/UserAuth.log", self.ProcessId, f"Product with ID {ProductId} does not exist", "Error")
+            logger_call(r"Log/UserAuth.log", self.ProcessId, f"Product with ID {ProductId} does not exist", "Error")
             return f"Product with ID {ProductId} does not exist"
         except Exception as e:
-            logger_call("/Log/UserAuth.log", self.ProcessId, f"An error occurred while deleting product: {e}", "Error")
+            logger_call(r"Log/UserAuth.log", self.ProcessId, f"An error occurred while deleting product: {e}", "Error")
             return str(e)
 
     def UpdateUserServices(self, UserId, rejected=None, accepted=None):
@@ -160,24 +162,24 @@ class UserAuth:
             if accepted is not None:
                 user.Accepted = accepted
             user.save()
-            logger_call("/Log/UserAuth.log", self.ProcessId, f"User with ID {UserId} updated successfully", "Info")
+            logger_call(r"Log/UserAuth.log", self.ProcessId, f"User with ID {UserId} updated successfully", "Info")
             return "User updated successfully"
         except UserProfileDetail.DoesNotExist:
-            logger_call("/Log/UserAuth.log", self.ProcessId, f"User with ID {UserId} does not exist", "Error")
+            logger_call(r"Log/UserAuth.log", self.ProcessId, f"User with ID {UserId} does not exist", "Error")
             return f"User with ID {UserId} does not exist"
         except Exception as e:
-            logger_call("/Log/UserAuth.log", self.ProcessId, f"An error occurred while updating user: {e}", "Error")
+            logger_call(r"Log/UserAuth.log", self.ProcessId, f"An error occurred while updating user: {e}", "Error")
             return str(e)
 
     def DeleteUserByIdServices(self, UserId):
         try:
             user = UserProfileDetail.objects.get(id=UserId)
             user.delete()
-            logger_call("/Log/UserAuth.log", self.ProcessId, f"User with ID {UserId} deleted successfully", "Info")
+            logger_call(r"Log/UserAuth.log", self.ProcessId, f"User with ID {UserId} deleted successfully", "Info")
             return "User deleted successfully"
         except UserProfileDetail.DoesNotExist:
-            logger_call("/Log/UserAuth.log", self.ProcessId, f"User with ID {UserId} does not exist", "Error")
+            logger_call(r"Log/UserAuth.log", self.ProcessId, f"User with ID {UserId} does not exist", "Error")
             return f"User with ID {UserId} does not exist"
         except Exception as e:
-            logger_call("/Log/UserAuth.log", self.ProcessId, f"An error occurred while deleting user: {e}", "Error")
+            logger_call(r"Log/UserAuth.log", self.ProcessId, f"An error occurred while deleting user: {e}", "Error")
             return str(e)

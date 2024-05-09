@@ -1,7 +1,6 @@
 import requests 
 import random
 import smtplib
-import os
 from Log.logger import logger_call
 from .models import UserProfileDetail, PhoneVerification, EmailVerification, Product
 from PixelotechDemo.settings import EMAIL,API_KEY,EMAIL_KEY

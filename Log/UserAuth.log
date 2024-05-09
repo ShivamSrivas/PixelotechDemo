@@ -1,0 +1,6 @@
+Date --> 2024-05-09 12:00:51 , ProcessId --> 444 , Message --> A new user is created with Name: Shivam, Email: shivam@gmail.com, Phone Number: 1234
+Date --> 2024-05-09 12:01:21 , ProcessId --> 444 , Message --> A new user is created with Name: Shivam Srivastava, Email: shivamsri@gmail.com, Phone Number: 123412
+Date --> 2024-05-09 12:02:47 , ProcessId --> 444 , Message --> Starting new HTTPS connection (1): 2factor.in:443
+Date --> 2024-05-09 12:02:48 , ProcessId --> 444 , Message --> https://2factor.in:443 "GET /API/V1/833244f2-0bde-11ef-8cbb-0200cd936042/SMS/8853157886/2021 HTTP/1.1" 200 None
+Date --> 2024-05-09 12:02:48 , ProcessId --> 444 , Message --> OTP sent via SMS
+Date --> 2024-05-09 12:04:45 , ProcessId --> 444 , Message --> D:\FinallyDemo\PixelotechDemo\PixelotechDemo\settings.py changed, reloading.

@@ -23,13 +23,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-25f6u!1pc63grb1!4c!n=@ml65e@o2)n+8+it!_^o4$_+txbo@'
-API_KEY="833244f2-0bde-11ef-8cbb-0200cd936042"
-EMAIL_KEY="uzqt brax gsrm kyxg"
+
 
 
 EMAIL={
-    "subject":'Hello from Django!',
-    "message":'This is a simple email sent using Django.',
+    "subject":'This Otp is Generated for demo purpose only',
+    "message":"<p style='color: red;'>This OTP is generated for demonstration purposes only and has no use in the real world. </p>",
     "sender_email":"thisemailisfordemopurposeonly@gmail.com",
 }
 
@@ -69,7 +68,7 @@ ROOT_URLCONF = 'PixelotechDemo.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -84,24 +83,27 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'PixelotechDemo.wsgi.application'
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'Pixelotech',
+#         'USER': 'postgres',
+#         'PASSWORD': '123456',
+#         'HOST': 'localhost',   
+#         'PORT': '5432',        
+#     }
+# }
 
 
-
+database_url = os.environ.get("DATABASE_URL")
+if isinstance(database_url, bytes):
+    database_url = database_url.decode('utf-8')
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'Pixelotech',
-        'USER': 'postgres',
-        'PASSWORD': '123456',
-        'HOST': 'localhost',   
-        'PORT': '5432',        
-    }
+    'default': dj_database_url.parse(database_url)
 }
 
-
-# DATABASES = {
-#     'default':dj_database_url.parse(os.environ.get("DATABASE_URL"))
-#     }
+API_KEY = os.environ.get("API_KEY")
+EMAIL_KEY = os.environ.get("EMAIL_KEY")
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators

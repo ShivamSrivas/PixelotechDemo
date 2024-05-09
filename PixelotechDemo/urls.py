@@ -24,9 +24,13 @@ urlpatterns = [
     path('getAllUser', views.GetAllUser, name='GetAllUser'),
     path('getUserById/<int:user_id>', views.GetUserById, name='GetUserById'),
     path('getAllProduct', views.GetAllProduct, name='GetAllProduct'),
-    path('getProductById/<int:user_id>', views.GetProductById, name='GetProductById'),
+    path('getProductById/<int:product_id>', views.GetProductById, name='GetProductById'),
     path('userRegistration', views.UserRegistration, name='UserRegistration'),
     path('otpGeneration', views.OtpGeneration, name='OtpGeneration'),
+    path('addProduct', views.AddProduct, name='AddProduct'),
+    path('deleteProductById/<int:product_id>', views.DeleteProductById, name='DeleteProductById'),
+    path('updateUser/<int:user_id>', views.UpdateUser, name='UpdateUser'),
+    path('deleteUserById/<int:user_id>', views.DeleteUserById, name='DeleteUserById'),
 ]
 
 urlpatterns+=staticfiles_urlpatterns()

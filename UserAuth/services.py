@@ -55,7 +55,7 @@ class UserAuth:
             else:
                 raise ValueError("Neither PhoneNumber nor EmailRecipient provided.")
         except Exception as error:
-            logger_call(r"Log/UserAuth.log", self.ProcessId, f"Unexpected error: {error}", "Error")
+            # logger_call(r"Log/UserAuth.log", self.ProcessId, f"Unexpected error: {error}", "Error")
             return "There's an error while generating otp kindly please try again"
 
     def UserVerificationServices(self, Otp, PhoneNumber=None, Email=None):
@@ -106,7 +106,13 @@ class UserAuth:
         except Exception as e:
             logger_call(r"Log/UserAuth.log", self.ProcessId, f"An error occurred while retrieving user details: {e}", "Error")
             return None
-
+        
+    def OtpDetailsServices(self):
+        """
+        Retrieve all phone verification entries.
+        """
+        return PhoneVerification.objects.all()
+    
     def GetProductByIdServices(self, unique_number):
         try:
             product = Product.objects.get(UniqueNumber=unique_number)
